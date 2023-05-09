@@ -1,5 +1,22 @@
 import PostModel from '../models/Post.js';
 
+
+export const getLastTags = async (req,res) => {
+    try { 
+      const posts = await PostModel.find().limit(5).exec();
+      
+      const tags = posts.map(obj => obj.tags).flat().slice(0, 5);
+
+      res.json(tags);
+
+    } catch (err){
+        console.log(err);
+        res.status(500).json({
+            message: 'Did not manage to get tags',
+        });
+    }
+};
+
 export const getAll = async (req,res) => {
     try { 
         const posts = await PostModel.find().populate('user').exec();
@@ -9,12 +26,13 @@ export const getAll = async (req,res) => {
     } catch (err){
         console.log(err);
         res.status(500).json({
-            message: 'Не удалось получить статьи',
+            message: 'Did not manage to get article',
         });
 
     }
 
 };
+
 export const getOne = async (req, res) => {
     try {
       const postId = req.params.id;
@@ -27,7 +45,7 @@ export const getOne = async (req, res) => {
   
       if (!updatedPost) {
         return res.status(404).json({
-          message: "Статья не найдена",
+          message: "Artice is not found",
         });
       }
   
@@ -35,7 +53,7 @@ export const getOne = async (req, res) => {
     } catch (err) {
       console.log(err);
       res.status(500).json({
-        message: "Не удалось получить статьи",
+        message: "Did not manage to get article",
       });
     }
   };
@@ -48,7 +66,7 @@ export const getOne = async (req, res) => {
   
       if (!doc) {
         return res.status(404).json({
-          message: 'Статья не найдена',
+          message: 'Artice is not found',
         });
       }
   
@@ -58,7 +76,7 @@ export const getOne = async (req, res) => {
     } catch (err) {
       console.log(err);
       res.status(500).json({
-        message: 'Не удалось удалить статью',
+        message: 'Did not manage to get article',
       });
     }
   };
@@ -83,7 +101,7 @@ export const create = async (req, res) => {
     } catch (err) {
         console.log(err);
         res.status(500).json({
-            message: 'Не удалось создать статью',
+            message: 'Did not manage to get article',
         });
     }
 };
@@ -109,7 +127,7 @@ export const update = async (req,res) => {
     } catch (err) {
         console.log(err);
         res.status(500).json({
-            message: 'Не удалось обновить статью',
+            message: 'Did not manage to get article',
         });
     }
 };
