@@ -34,7 +34,7 @@ app.use(express.json());
 app.use(cors());
 app.use('/uploads', express.static('uploads'));
 
-app.post('/auth/login', loginValidation, handleValidationErrors, UserController.login);
+app.get('/auth/login', loginValidation, handleValidationErrors, UserController.login); // was post instead of get
 
 app.post('/auth/register', registerValidation, handleValidationErrors, UserController.register);
 
@@ -47,7 +47,6 @@ app.post('/upload', checkAuth, upload.single('image'), (req, res) => {
     });
   });
   
-
 app.get('/tags', PostController.getLastTags);
 
 app.get('/posts', PostController.getAll);
