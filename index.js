@@ -34,9 +34,9 @@ app.use(express.json());
 app.use(cors());
 app.use('/uploads', express.static('uploads'));
 
-app.get('/auth/login', loginValidation, handleValidationErrors, UserController.login); // was post instead of get
+app.get('/auth/login', loginValidation, handleValidationErrors, UserController.login); 
 
-app.post('/auth/register', registerValidation, handleValidationErrors, UserController.register);
+app.get('/auth/register', registerValidation, handleValidationErrors, UserController.register); //was post now get
 
 app.get('/auth/me', checkAuth, UserController.getMe);
 
