@@ -36,7 +36,7 @@ app.use('/uploads', express.static('uploads'));
 
 app.get('/auth/login', loginValidation, handleValidationErrors, UserController.login); 
 
-app.get('/auth/register', registerValidation, handleValidationErrors, UserController.register); //was post now get
+app.post('/auth/register', registerValidation, handleValidationErrors, UserController.register); //was post now get
 
 app.get('/auth/me', checkAuth, UserController.getMe);
 
