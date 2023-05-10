@@ -11,14 +11,14 @@ export default (req, res, next) => {
 
         } catch (e) {
             return res.status(403).json({
-                message: 'Нет доступа',
+                message: 'No access',
     
             });
         }
 
     } else {
         return res.status(403).json({
-            message: 'Нет доступа',
+            message: 'No access',
 
         });
         

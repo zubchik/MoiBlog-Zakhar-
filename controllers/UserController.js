@@ -47,7 +47,7 @@ export const register = async (req, res) => {
     } catch (err)  {
         console.log(err);
         res.status(500).json({
-            message: 'Не удалось зарегистрироваться',
+            message: 'Registration unsaccesfull',
         });
 
     }
@@ -61,7 +61,7 @@ export const login = async (req, res) => {
 
        if(!user){
         return res.status(404).json({
-            message:'Пользователь не найден',
+            message:'User is not found',
         });
        }
 
@@ -69,7 +69,7 @@ export const login = async (req, res) => {
       const isValidPass = await bcrypt.compare(req.body.password, user._doc.passwordHash);
       if(!isValidPass) {
         return res.status(400).json({
-            message:'Неверный логин или пароль',
+            message:'Wrong password or login',
         });
 
       }
@@ -94,7 +94,7 @@ export const login = async (req, res) => {
     }  catch (err) {
         console.log(err);
         res.status(500).json({
-            message: 'Не удалось авторизоваться',
+            message: 'Authorization unsaccesfull',
         });
     }
 };
@@ -104,7 +104,7 @@ export const getMe = async (req,res) => {
         const user = await UserModel.findById(req.userId);
         if (!user) {
             return res.status(404).json({
-                message: 'Пользователь не найден',
+                message: 'User is not found',
             });
         }
         const { passwordHash, ...userData } = user._doc;
@@ -115,7 +115,7 @@ export const getMe = async (req,res) => {
     } catch (err) { 
         console.log(err);
         res.status(500).json({
-            message: 'Нет доступа',
+            message: 'No access',
         });
 }
 };
