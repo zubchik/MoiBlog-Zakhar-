@@ -12,7 +12,7 @@ export const getLastTags = async (req,res) => {
     } catch (err){
         console.log(err);
         res.status(500).json({
-            message: 'Did not manage to get tags',
+            message: 'Did not manage to get tags(PostController.js)',
         });
     }
 };
@@ -26,7 +26,7 @@ export const getAll = async (req,res) => {
     } catch (err){
         console.log(err);
         res.status(500).json({
-            message: 'Did not manage to get article',
+            message: 'Did not manage to get article(PostController.js)',
         });
 
     }
@@ -36,16 +36,19 @@ export const getAll = async (req,res) => {
 export const getOne = async (req, res) => {
     try {
       const postId = req.params.id;
+      console.log('works');
+      console.log('postId:', postId);
+      
   
       const updatedPost = await PostModel.findOneAndUpdate(
-        { _id: postId },
+        { id: postId },
         { $inc: { viewsCount: 1 } },
         { new: true }
       ).exec();
   
       if (!updatedPost) {
         return res.status(404).json({
-          message: "Artice is not found",
+          message: "Artice is not found(PostController.js)",
         });
       }
   
@@ -53,7 +56,7 @@ export const getOne = async (req, res) => {
     } catch (err) {
       console.log(err);
       res.status(500).json({
-        message: "Did not manage to get article",
+        message: "Did not manage to get article(PostController.js)",
       });
     }
   };
@@ -62,11 +65,11 @@ export const getOne = async (req, res) => {
   export const remove = async (req, res) => {
     try {
       const postId = req.params.id;
-      const doc = await PostModel.findOneAndDelete({ _id: postId });
+      const doc = await PostModel.findOneAndDelete({ id: postId });
   
       if (!doc) {
         return res.status(404).json({
-          message: 'Artice is not found',
+          message: 'Artice is not found(PostController.js)',
         });
       }
   
@@ -76,14 +79,11 @@ export const getOne = async (req, res) => {
     } catch (err) {
       console.log(err);
       res.status(500).json({
-        message: 'Did not manage to get article',
+        message: 'Did not manage to get article(PostController.js)',
       });
     }
   };
   
-
-
-
 
 export const create = async (req, res) => {
     try{
@@ -101,7 +101,7 @@ export const create = async (req, res) => {
     } catch (err) {
         console.log(err);
         res.status(500).json({
-            message: 'Did not manage to get article',
+            message: 'Did not manage to get article(PostController.js)',
         });
     }
 };
@@ -127,7 +127,7 @@ export const update = async (req,res) => {
     } catch (err) {
         console.log(err);
         res.status(500).json({
-            message: 'Did not manage to get article',
+            message: 'Did not manage to get article(PostController.js)',
         });
     }
 };
